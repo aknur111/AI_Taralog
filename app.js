@@ -7,6 +7,8 @@ const viewRoutes = require("./routes/view.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const readingRoutes = require("./routes/reading.routes");
+const adminRoutes = require("./routes/admin.routes");
+
 
 const errorMiddleware = require("./middleware/error.middleware");
 
@@ -23,6 +25,8 @@ app.use("/", viewRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/readings", readingRoutes);
+app.use("/api/admin", adminRoutes);
+
 
 app.get("/health", (req, res) => res.json({ status: "ok" }));
 
