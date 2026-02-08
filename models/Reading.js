@@ -17,7 +17,9 @@ const readingSchema = new mongoose.Schema(
     spreadType: { type: String, required: true, default: "single" },
     question: { type: String, default: "" },
     cards: { type: [cardSchema], default: [] },
-    aiInterpretation: { type: String, default: "" }
+    aiInterpretation: { type: String, default: "" },
+    readingType: { type: String, required: true},
+    additionalData: { type: Object, default: {} }
   },
   { timestamps: true }
 );
