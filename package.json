@@ -1,12 +1,16 @@
 {
   "name": "ai_taralog",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Tarot reading application with AI interpretations",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "cd client && npm install && npm run build",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
