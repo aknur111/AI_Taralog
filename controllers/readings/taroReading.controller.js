@@ -1,17 +1,19 @@
 const Reading = require("../../models/Reading");
-const Prompt = require("../../models/Prompt");
 const User = require("../../models/User");
 const grokApiService = require("../../services/grokApi.service");
-const contextBuilderService = require("../../services/contextBuilder.server");
+const contextBuilderService = require("../../services/contextBuilder.service");
 
 exports.createTaroReading = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id);
+    const { cards, language = 'en' } = req.body;
     
-    const cards = await tarotApiService.getRandomCards(5);
+    if (!cards || cards.length !== 5) {
+      return res.status(400).json({ message: "Exactly 5 cards required" });
+    }
 
     const systemPrompt = await contextBuilderService.getSystemPrompt("taro");
-    const userMessage = await contextBuilderService.buildUserMessage(user, req.body.question, cards);
+    const userMessage = contextBuilderService.buildUserMessage(user, null, cards, null, language);
     
     const interpretation = await grokApiService.getInterpretation(systemPrompt, userMessage);
     
@@ -19,9 +21,8 @@ exports.createTaroReading = async (req, res, next) => {
       user: req.user.id,
       readingType: "taro",
       spreadType: "five_card",
-      question: req.body.question || "Taro reading",
+      question: "",
       cards: cards,
-      additionalData: "No additional data",
       aiInterpretation: interpretation
     });
     
