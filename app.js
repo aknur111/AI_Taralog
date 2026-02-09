@@ -9,6 +9,10 @@ const readingRoutes = require("./routes/reading.routes");
 const adminRoutes = require("./routes/admin.routes");
 const promptRoutes = require("./routes/prompt.routes");
 const errorMiddleware = require("./middleware/error.middleware");
+// const emailRoutes = require("./routes/email.routes");
+const emailRoutes = require("./routes/email.routes");
+
+
 
 const app = express();
 
@@ -21,6 +25,8 @@ app.use("/api/users", userRoutes);
 app.use("/api/readings", readingRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/prompts", promptRoutes);
+app.use("/api/email", emailRoutes);
+
 
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 

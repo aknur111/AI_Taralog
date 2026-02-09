@@ -1,4 +1,5 @@
 import { useState } from 'react';
+const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,64}$/;
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
@@ -30,6 +31,10 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    if (!passwordRule.test(formData.password)) {
+      setError("Password must be 8+ chars and include: uppercase, lowercase, number, special symbol.");
+      return;
+    }
     setIsLoading(true);
     
     try {
@@ -123,7 +128,7 @@ export default function Register() {
                   onChange={(e) => handleChange('password', e.target.value)}
                   className="w-full bg-white/5 border border-purple-500/30 rounded-lg pl-11 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-purple-400 transition-colors"
                   placeholder="••••••••"
-                  minLength={6}
+                  minLength={8}
                   required
                 />
               </div>
