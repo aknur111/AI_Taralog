@@ -244,26 +244,74 @@ Error responses include meaningful status codes:
 
 - 500 for unexpected server errors
 
+## Screenshots
 
-### Screenshots
+### API tests (Postman)
 
- - Register page
+#### Health check
+![check_health](./screenshots/check_health.png)
+
+#### Registration success
+![registration_success](./screenshots/registration_success.png)
+
+#### Registration: weak password (validation)
+![registration_weak_password](./screenshots/registration_weak_password.png)
+
+#### Registration: user already exists
+![user_already_exists_error](./screenshots/user_already_exists_error.png)
+
+#### Login
+![log_in_user](./screenshots/log_in_user.png)
+
+#### Get profile (authorized)
+![get_user_me](./screenshots/get_user_me.png)
+
+#### Get profile (without token)
+![get_user_me_without_token](./screenshots/get_user_me_without_token.png)
+
+#### Email: registration message
+![email_message_registration](./screenshots/email_message_registration.png)
+
+#### Email: sending test
+![email_sending_test](./screenshots/email_sending_test.png)
+
+### Readings
+
+#### Create reading (base)
+![create_readings](./screenshots/create_readings.png)
+
+#### Create taro reading
+![create_readings_taro](./screenshots/create_readings_taro.png)
+
+#### Create love reading
+![create_readings_love](./screenshots/create_readings_love.png)
+
+#### Create money reading
+![create_reading_money](./screenshots/create_reading_money.png)
+
+#### Create work reading
+![create_readings_work](./screenshots/create_readings_work.png)
+
+#### Create general question reading
+![readings_general_question](./screenshots/readings_general_question.png)
+
+#### Get all readings
+![get_readings](./screenshots/get_readings.png)
+
+#### Get reading by ID
+![get_readings_by_id](./screenshots/get_readings_by_id.png)
+
+#### Update reading
+![update_the_readings](./screenshots/update_the_readings.png)
+
+#### Delete reading
+![delete_the_readings](./screenshots/delete_the_readings.png)
 
 
 
- - Login page
+## Deployed URL
 
- - Profile page
-
- - Readings list
-
- - Create reading
-
-- Deployment
-
-- Deployed URL: TBD
-
-- MongoDB Atlas connection via environment variables
+http://167.172.217.212:3000 
 
 ### License
 
