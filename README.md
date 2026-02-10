@@ -270,7 +270,7 @@ Error responses include meaningful status codes:
 ![get_user_me_without_token](./screenshots/get_user_me_without_token.png)
 
 #### Email: registration message
-![email_message_registration](./screenshots/email_message_registration.png)
+![email_message_registration](./screenshots/email_message_registration2.png)
 
 #### Email: sending test
 ![email_sending_test](./screenshots/email_sending_test.png)
