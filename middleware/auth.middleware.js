@@ -1,16 +1,17 @@
 const jwt = require("jsonwebtoken");
 
-function auth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header || !header.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Unauthorized: missing token" });
-  }
-  const token = header.split(" ")[1];
+module.exports = function auth(req, res, next) {
   try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    const header = req.headers.authorization || "";
+    const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+    if (!process.env.JWT_SECRET) return res.status(500).json({ message: "JWT_SECRET is missing" });
+
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = payload;
     next();
-  } catch {
-    return res.status(401).json({ message: "Unauthorized: invalid token" });
+  } catch (e) {
+    return res.status(401).json({ message: "Unauthorized" });
   }
-}
-module.exports = auth;
+};

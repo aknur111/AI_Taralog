@@ -9,7 +9,6 @@ const readingRoutes = require("./routes/reading.routes");
 const adminRoutes = require("./routes/admin.routes");
 const promptRoutes = require("./routes/prompt.routes");
 const errorMiddleware = require("./middleware/error.middleware");
-// const emailRoutes = require("./routes/email.routes");
 const emailRoutes = require("./routes/email.routes");
 
 
