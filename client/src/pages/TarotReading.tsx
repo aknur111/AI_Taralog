@@ -190,7 +190,7 @@ export default function TarotReading() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-6xl mx-auto px-4 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -202,7 +202,7 @@ export default function TarotReading() {
         <p className="text-gray-400">{t('tarot.subtitle')}</p>
       </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 mb-12 px-2">
         {cards.map((card, index) => (
           <motion.div
             key={index}
@@ -211,20 +211,20 @@ export default function TarotReading() {
             transition={{ delay: index * 0.15 }}
             className="relative"
           >
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-xs px-3 py-1 rounded-full whitespace-nowrap">
+            <div className="absolute -top-5 sm:-top-8 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full whitespace-nowrap">
               {card.position}
             </div>
             
             <div
               onClick={() => flipCard(index)}
-              className={`card-flip w-[120px] h-[200px] sm:w-[140px] sm:h-[230px] md:w-[150px] md:h-[250px] cursor-pointer ${
+              className={`card-flip w-[60px] h-[100px] xs:w-[80px] xs:h-[130px] sm:w-[120px] sm:h-[200px] md:w-[150px] md:h-[250px] cursor-pointer ${
                 !card.isFlipped ? 'animate-pulse-glow' : ''
               }`}
             >
               <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
                 <div className="card-face card-back rounded-xl overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
                   <div className="w-full h-full flex items-center justify-center bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10%200L20%2010L10%2020L0%2010z%22%20fill%3D%22%239333ea%22%20fill-opacity%3D%220.1%22%2F%3E%3C%2Fsvg%3E')]">
-                    <span className="text-4xl md:text-5xl">✦</span>
+                    <span className="text-xl sm:text-4xl md:text-5xl">✦</span>
                   </div>
                 </div>
                 
@@ -240,12 +240,12 @@ export default function TarotReading() {
                 </div>
               </div>
             </div>
-            <div className="mt-2 text-center max-w-[120px] sm:max-w-[140px] md:max-w-[150px]">
-              <p className="text-amber-400 text-xs font-medium leading-tight truncate">
+            <div className="mt-1 sm:mt-2 text-center max-w-[60px] xs:max-w-[80px] sm:max-w-[120px] md:max-w-[150px]">
+              <p className="text-amber-400 text-[8px] sm:text-xs font-medium leading-tight truncate">
                 {card.name}
               </p>
               {card.isReversed && (
-                <p className="text-purple-400 text-[10px]">({t('tarot.reversed')})</p>
+                <p className="text-purple-400 text-[6px] sm:text-[10px]">({t('tarot.reversed')})</p>
               )}
             </div>
           </motion.div>
