@@ -25,6 +25,10 @@ class ContextBuilderService {
       if (userData.lastName) {
         context += `Client surname: ${userData.lastName}\n`;
       }
+      if (userData.gender) {
+        const genderLabel = userData.gender === 'female' ? 'Female' : userData.gender === 'male' ? 'Male' : 'Other';
+        context += `Gender: ${genderLabel}\n`;
+      }
       if (userData.birthDate) {
         context += `Birth date: ${userData.birthDate}\n`;
       }
@@ -56,6 +60,10 @@ class ContextBuilderService {
         context += `\nPartner information:\n`;
         if (additionalData.firstName) context += `Name: ${additionalData.firstName}\n`;
         if (additionalData.lastName) context += `Surname: ${additionalData.lastName}\n`;
+        if (additionalData.gender) {
+          const genderLabel = additionalData.gender === 'female' ? 'Female' : additionalData.gender === 'male' ? 'Male' : 'Other';
+          context += `Gender: ${genderLabel}\n`;
+        }
         if (additionalData.birthDate) context += `Birth date: ${additionalData.birthDate}\n`;
         if (additionalData.birthPlace) context += `Birth place: ${additionalData.birthPlace}\n`;
         if (additionalData.birthTime) context += `Birth time: ${additionalData.birthTime}\n`;
