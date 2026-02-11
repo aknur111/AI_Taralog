@@ -72,25 +72,25 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-xl mx-auto px-4 overflow-x-hidden">
+    <div className="max-w-xl mx-auto px-3 sm:px-4 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass rounded-2xl p-6 md:p-8"
+        className="glass rounded-2xl p-4 sm:p-6 md:p-8"
       >
-        <div className="text-center mb-8">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center mx-auto mb-4">
-            <User className="w-10 h-10 text-white" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+            <User className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-amber-400">{user?.username}</h1>
-          <p className="text-gray-400">{user?.email}</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-amber-400">{user?.username}</h1>
+          <p className="text-gray-400 text-sm sm:text-base">{user?.email}</p>
         </div>
 
-        <div className="border-t border-purple-500/20 pt-6">
-          <h2 className="text-lg font-semibold text-purple-400 mb-2">
+        <div className="border-t border-purple-500/20 pt-4 sm:pt-6">
+          <h2 className="text-base sm:text-lg font-semibold text-purple-400 mb-2">
             {t('profile.personalData')}
           </h2>
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6">
             {t('profile.personalSub')}
           </p>
 
@@ -98,73 +98,71 @@ export default function Profile() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-3 rounded-lg mb-6"
+              className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 py-2 sm:py-3 rounded-lg mb-4 sm:mb-6 text-sm"
             >
-              <Check className="w-5 h-5" />
+              <Check className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{t('profile.saved')}</span>
             </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">
-                  {t('profile.firstName')}
-                </label>
-                <input
-                  type="text"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData(f => ({ ...f, firstName: e.target.value }))}
-                  className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-400 mb-2">
-                  {t('profile.lastName')}
-                </label>
-                <input
-                  type="text"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData(f => ({ ...f, lastName: e.target.value }))}
-                  className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-400"
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">
+                {t('profile.firstName')}
+              </label>
+              <input
+                type="text"
+                value={formData.firstName}
+                onChange={(e) => setFormData(f => ({ ...f, firstName: e.target.value }))}
+                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">
+                {t('profile.lastName')}
+              </label>
+              <input
+                type="text"
+                value={formData.lastName}
+                onChange={(e) => setFormData(f => ({ ...f, lastName: e.target.value }))}
+                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
+              />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
+              <label className="block text-sm text-gray-400 mb-1">
                 {t('profile.birthDate')}
               </label>
               <input
                 type="date"
                 value={formData.birthDate}
                 onChange={(e) => setFormData(f => ({ ...f, birthDate: e.target.value }))}
-                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-400"
+                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
+              <label className="block text-sm text-gray-400 mb-1">
                 {t('profile.birthPlace')}
               </label>
               <input
                 type="text"
                 value={formData.birthPlace}
                 onChange={(e) => setFormData(f => ({ ...f, birthPlace: e.target.value }))}
-                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-400"
+                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
                 placeholder="City, Country"
               />
             </div>
 
             <div>
-              <label className="block text-sm text-gray-400 mb-2">
+              <label className="block text-sm text-gray-400 mb-1">
                 {t('profile.birthTime')}
               </label>
               <input
                 type="time"
                 value={formData.birthTime}
                 onChange={(e) => setFormData(f => ({ ...f, birthTime: e.target.value }))}
-                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-400"
+                className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
               />
             </div>
 

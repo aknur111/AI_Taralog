@@ -139,13 +139,13 @@ export default function Register() {
             </div>
 
             <div className="pt-4 border-t border-purple-500/20">
-              <p className="text-purple-400 text-sm font-medium mb-4">{t('auth.birthDataTitle')}</p>
-              <p className="text-gray-500 text-xs mb-4">{t('auth.birthDataHint')}</p>
+              <p className="text-purple-400 text-sm font-medium mb-3 sm:mb-4">{t('auth.birthDataTitle')}</p>
+              <p className="text-gray-500 text-xs mb-3 sm:mb-4">{t('auth.birthDataHint')}</p>
               
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-3">
+                <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       {t('profile.firstName')} *
                     </label>
                     <input
@@ -157,7 +157,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       {t('profile.lastName')} *
                     </label>
                     <input
@@ -171,7 +171,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     <Calendar className="w-4 h-4 inline mr-1" />
                     {t('profile.birthDate')} *
                   </label>
@@ -185,7 +185,7 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
                     <MapPin className="w-4 h-4 inline mr-1" />
                     {t('profile.birthPlace')} *
                   </label>
@@ -199,9 +199,9 @@ export default function Register() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       <Clock className="w-4 h-4 inline mr-1" />
                       {t('profile.birthTime')}
                       <span className="text-gray-500 text-xs ml-1">({t('auth.optional')})</span>
@@ -214,7 +214,7 @@ export default function Register() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       {t('profile.gender')} *
                     </label>
                     <div className="relative">
