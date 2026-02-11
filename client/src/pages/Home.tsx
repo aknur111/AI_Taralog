@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
       <section className="text-center py-16 md:py-24">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="relative w-72 h-72 md:w-96 md:h-96 mx-auto mb-12"
+          className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 mx-auto mb-12"
         >
           <div className="absolute inset-0 z-0">
             <motion.div 
@@ -86,12 +86,12 @@ export default function Home() {
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="relative w-48 h-48 md:w-64 md:h-64 animate-float">
+            <div className="relative w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 animate-float flex items-center justify-center">
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 blur-2xl animate-pulse" />
               <img 
-                src="/crystal-ball.png" 
+                src="/crystal-ball.svg" 
                 alt="Crystal Ball" 
-                className="relative w-full h-full object-contain drop-shadow-2xl"
+                className="relative max-w-full max-h-full object-contain drop-shadow-2xl mx-auto"
               />
             </div>
           </div>

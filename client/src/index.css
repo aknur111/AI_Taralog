@@ -3,11 +3,25 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: linear-gradient(180deg, #0f0a1a 0%, #1a0f2e 50%, #0f0a1a 100%);
   min-height: 100vh;
+  min-height: 100dvh;
   color: white;
+  position: relative;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 .glass {

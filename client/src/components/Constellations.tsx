@@ -91,7 +91,7 @@ export default function Constellations() {
       ))}
 
       <motion.img
-        src="/sagittarius.png"
+        src="/sagittarius.svg"
         alt=""
         className="absolute w-[300px] md:w-[450px] lg:w-[550px] h-auto opacity-10 md:opacity-20"
         style={{ 
@@ -114,7 +114,7 @@ export default function Constellations() {
       />
       
       <motion.img
-        src="/ursa.png"
+        src="/ursa.svg"
         alt=""
         className="absolute w-[280px] md:w-[400px] lg:w-[500px] h-auto opacity-10 md:opacity-15"
         style={{ 
