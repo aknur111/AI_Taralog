@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
-import { Sparkles, Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2 group">
-            <Sparkles className="w-8 h-8 text-amber-400 group-hover:scale-110 transition-transform" />
+            <img src="/logo.png" alt="Taralog" className="w-10 h-10 group-hover:scale-110 transition-transform" />
             <span className="text-xl font-bold text-gradient">Taralog</span>
           </Link>
 

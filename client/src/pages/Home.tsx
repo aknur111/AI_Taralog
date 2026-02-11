@@ -49,11 +49,51 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="relative w-48 h-48 md:w-64 md:h-64 mx-auto mb-12"
+          className="relative w-72 h-72 md:w-96 md:h-96 mx-auto mb-12"
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/30 to-violet-700/30 blur-2xl animate-pulse" />
-          <div className="relative w-full h-full rounded-full bg-gradient-to-br from-purple-900/50 to-violet-900/50 border border-purple-500/30 flex items-center justify-center animate-float">
-            <span className="text-7xl md:text-8xl">🔮</span>
+          <div className="absolute inset-0 z-0">
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-purple-300/10"
+              style={{ scale: 1.8 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gradient-to-br from-indigo-300/80 to-purple-400/80 shadow-md shadow-indigo-400/30" />
+            </motion.div>
+
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-amber-300/10"
+              style={{ scale: 1.5 }}
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="absolute -top-2 left-1/2 -translate-x-1/2">
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute w-9 h-3 border border-amber-300/50 rounded-full" style={{ transform: 'rotateX(65deg)' }} />
+                  <div className="w-4 h-4 rounded-full bg-gradient-to-br from-amber-200/80 to-orange-300/80 shadow-md shadow-amber-300/30 relative z-10" />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="absolute inset-0 rounded-full border border-rose-300/10"
+              style={{ scale: 1.25 }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-rose-200/80 to-pink-300/80 shadow-md shadow-rose-300/30" />
+            </motion.div>
+          </div>
+
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="relative w-48 h-48 md:w-64 md:h-64 animate-float">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 blur-2xl animate-pulse" />
+              <img 
+                src="/crystal-ball.png" 
+                alt="Crystal Ball" 
+                className="relative w-full h-full object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
         </motion.div>
 
