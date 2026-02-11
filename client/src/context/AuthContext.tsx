@@ -11,6 +11,7 @@ interface User {
   birthDate?: string;
   birthPlace?: string;
   birthTime?: string;
+  gender?: string;
 }
 
 interface PersonalData {
@@ -19,6 +20,7 @@ interface PersonalData {
   birthDate?: string;
   birthPlace?: string;
   birthTime?: string;
+  gender?: string;
 }
 
 interface AuthContextType {
@@ -59,7 +61,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data = await response.json();
     
     if (!response.ok) {
-      throw new Error(data.message || 'Login failed');
+      const errorMsg = data.details?.length 
+        ? data.details.join('. ') 
+        : (data.message || 'Login failed');
+      throw new Error(errorMsg);
     }
     
     localStorage.setItem('token', data.token);
@@ -77,6 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (personalData.birthDate) body.birthDate = personalData.birthDate;
       if (personalData.birthPlace) body.birthPlace = personalData.birthPlace;
       if (personalData.birthTime) body.birthTime = personalData.birthTime;
+      if (personalData.gender) body.gender = personalData.gender;
     }
 
     const response = await fetch('/api/auth/register', {
@@ -88,7 +94,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data = await response.json();
     
     if (!response.ok) {
-      throw new Error(data.message || 'Registration failed');
+      const errorMsg = data.details?.length 
+        ? data.details.join('. ') 
+        : (data.message || 'Registration failed');
+      throw new Error(errorMsg);
     }
     
     localStorage.setItem('token', data.token);

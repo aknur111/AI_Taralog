@@ -23,6 +23,7 @@ function safeUser(user) {
     birthDate: user.birthDate,
     birthPlace: user.birthPlace,
     birthTime: user.birthTime,
+    gender: user.gender,
   };
 }
 

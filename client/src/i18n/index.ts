@@ -8,7 +8,7 @@ const resources = {
         home: 'Home',
         history: 'History',
         profile: 'Profile',
-        prompts: 'Prompts',
+        prompts: 'Admin',
         login: 'Sign In',
         logout: 'Sign Out'
       },
@@ -64,7 +64,9 @@ const resources = {
         birthPlacePlaceholder: 'City, Country',
         birthDataTitle: 'Birth Data for Destiny Matrix',
         birthDataHint: 'This data is required to build your personal destiny matrix and provide accurate readings.',
-        optional: 'optional'
+        optional: 'optional',
+        passwordHint: 'Minimum 8 characters: uppercase, lowercase, number, special symbol',
+        passwordWeak: 'Password must be 8+ characters with: uppercase, lowercase, number, special symbol'
       },
       tarot: {
         title: 'Five Card Spread',
@@ -135,11 +137,21 @@ const resources = {
         birthDate: 'Birth Date',
         birthPlace: 'Birth Place',
         birthTime: 'Birth Time',
+        gender: 'Gender',
+        selectGender: 'Select gender',
+        male: 'Male',
+        female: 'Female',
+        other: 'Other',
         save: 'Save',
         saved: 'Data saved successfully'
       },
       admin: {
-        title: 'Prompt Management',
+        title: 'Admin Panel',
+        tabs: {
+          prompts: 'Prompts',
+          users: 'Users',
+          analytics: 'Analytics'
+        },
         create: 'Create Prompt',
         edit: 'Edit',
         delete: 'Delete',
@@ -151,12 +163,40 @@ const resources = {
         confirmDelete: 'Delete this prompt?',
         confirmDeleteSub: 'This action cannot be undone. Readings of this type will stop working.',
         empty: 'No prompts created',
-        emptySub: 'Create system prompts for different reading types'
+        emptySub: 'Create system prompts for different reading types',
+        users: {
+          title: 'Users',
+          total: 'Total users',
+          search: 'Search by name or email...',
+          noResults: 'No users found',
+          registered: 'Registered',
+          readings: 'readings',
+          sortBy: 'Sort',
+          byName: 'Name',
+          byReadings: 'Readings'
+        },
+        analytics: {
+          title: 'Analytics',
+          totalUsers: 'Total Users',
+          totalReadings: 'Total Readings',
+          genderDistribution: 'Gender Distribution',
+          ageDistribution: 'Age Distribution',
+          readingTypes: 'Reading Types',
+          dailyActivity: 'Daily Activity (30 days)',
+          years: 'years',
+          uniqueUsers: 'Unique users per type',
+          people: 'people',
+          requests: 'requests',
+          requestsByGender: 'Requests by Gender',
+          requestsByAge: 'Requests by Age',
+          daysAgo: 'days ago'
+        }
       },
       common: {
         back: 'Back',
         close: 'Close',
-        error: 'An error occurred'
+        error: 'An error occurred',
+        today: 'Today'
       }
     }
   },
@@ -166,7 +206,7 @@ const resources = {
         home: 'Главная',
         history: 'История',
         profile: 'Профиль',
-        prompts: 'Промпты',
+        prompts: 'Админ',
         login: 'Войти',
         logout: 'Выйти'
       },
@@ -222,7 +262,9 @@ const resources = {
         birthPlacePlaceholder: 'Город, Страна',
         birthDataTitle: 'Данные для матрицы судьбы',
         birthDataHint: 'Эти данные необходимы для построения вашей персональной матрицы судьбы и точных гаданий.',
-        optional: 'необязательно'
+        optional: 'необязательно',
+        passwordHint: 'Минимум 8 символов: заглавная, строчная, цифра, спецсимвол',
+        passwordWeak: 'Пароль должен содержать 8+ символов: заглавную, строчную, цифру, спецсимвол'
       },
       tarot: {
         title: 'Расклад Пяти Карт',
@@ -293,11 +335,21 @@ const resources = {
         birthDate: 'Дата рождения',
         birthPlace: 'Место рождения',
         birthTime: 'Время рождения',
+        gender: 'Пол',
+        selectGender: 'Выберите пол',
+        male: 'Мужской',
+        female: 'Женский',
+        other: 'Другой',
         save: 'Сохранить',
         saved: 'Данные успешно сохранены'
       },
       admin: {
-        title: 'Управление промптами',
+        title: 'Панель администратора',
+        tabs: {
+          prompts: 'Промпты',
+          users: 'Пользователи',
+          analytics: 'Аналитика'
+        },
         create: 'Создать промпт',
         edit: 'Изменить',
         delete: 'Удалить',
@@ -309,12 +361,40 @@ const resources = {
         confirmDelete: 'Удалить этот промпт?',
         confirmDeleteSub: 'Это действие нельзя отменить. Гадания этого типа перестанут работать.',
         empty: 'Промпты не созданы',
-        emptySub: 'Создайте системные промпты для разных типов гаданий'
+        emptySub: 'Создайте системные промпты для разных типов гаданий',
+        users: {
+          title: 'Пользователи',
+          total: 'Всего пользователей',
+          search: 'Поиск по имени или email...',
+          noResults: 'Пользователи не найдены',
+          registered: 'Зарегистрирован',
+          readings: 'гаданий',
+          sortBy: 'Сортировка',
+          byName: 'По имени',
+          byReadings: 'По запросам'
+        },
+        analytics: {
+          title: 'Аналитика',
+          totalUsers: 'Всего пользователей',
+          totalReadings: 'Всего гаданий',
+          genderDistribution: 'Распределение по полу',
+          ageDistribution: 'Распределение по возрасту',
+          readingTypes: 'Типы гаданий',
+          dailyActivity: 'Активность за 30 дней',
+          years: 'лет',
+          uniqueUsers: 'Уникальные пользователи по типу',
+          people: 'чел.',
+          requests: 'запросов',
+          requestsByGender: 'Запросы по полу',
+          requestsByAge: 'Запросы по возрасту',
+          daysAgo: 'дней назад'
+        }
       },
       common: {
         back: 'Назад',
         close: 'Закрыть',
-        error: 'Произошла ошибка'
+        error: 'Произошла ошибка',
+        today: 'Сегодня'
       }
     }
   }
