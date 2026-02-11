@@ -51,7 +51,7 @@ export default function Home() {
           transition={{ delay: 0.2 }}
           className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 mx-auto mb-12"
         >
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <motion.div 
               className="absolute inset-0 rounded-full border border-purple-300/10"
               style={{ scale: 1.8 }}

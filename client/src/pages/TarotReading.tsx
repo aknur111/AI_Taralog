@@ -189,98 +189,70 @@ export default function TarotReading() {
     );
   }
 
+  const renderMobileCard = (card: CardState, cardIndex: number, isTopRow: boolean) => (
+    <motion.div
+      key={cardIndex}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: cardIndex * 0.1 }}
+      className="flex flex-col items-center"
+    >
+      <div className="bg-purple-600 text-white text-[9px] px-2 py-0.5 rounded-full mb-1 shrink-0">
+        {card.position}
+      </div>
+      <div
+        onClick={() => flipCard(cardIndex)}
+        className={`card-flip w-full cursor-pointer shrink-0 ${!card.isFlipped ? 'animate-pulse-glow' : ''}`}
+        style={{ 
+          aspectRatio: '2/3',
+          maxHeight: isTopRow ? 'calc((100dvh - 16rem) * 0.45)' : 'calc((100dvh - 16rem) * 0.38)'
+        }}
+      >
+        <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
+          <div className="card-face card-back rounded-lg overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
+            <div className="w-full h-full flex items-center justify-center">
+              <span className="text-xl">✦</span>
+            </div>
+          </div>
+          <div 
+            className="card-face card-front rounded-lg overflow-hidden border-2 border-amber-500/50 bg-white"
+            style={{ transform: card.isReversed ? 'rotateY(180deg) rotate(180deg)' : 'rotateY(180deg)' }}
+          >
+            <img src={CARD_IMAGES[card.name_short] || ''} alt={card.name} className="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+      <div className="mt-1 text-center shrink-0">
+        <p className="text-amber-400 text-[9px] font-medium leading-tight">{card.name}</p>
+        {card.isReversed && <p className="text-purple-400 text-[7px]">({t('tarot.reversed')})</p>}
+      </div>
+    </motion.div>
+  );
+
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex flex-col px-3 overflow-x-hidden">
+    <div className="h-[calc(100dvh-5rem)] sm:min-h-[calc(100vh-5rem)] sm:h-auto flex flex-col px-3 overflow-x-hidden overflow-y-auto sm:overflow-visible">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-6 sm:mb-8"
+        className="text-center mb-2 sm:mb-8 pt-2 sm:pt-0 shrink-0"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-400 mb-2">
+        <h1 className="text-xl sm:text-3xl md:text-4xl font-bold text-amber-400 mb-1 sm:mb-2">
           {t('tarot.title')}
         </h1>
-        <p className="text-gray-400 text-sm sm:text-base">{t('tarot.subtitle')}</p>
+        <p className="text-gray-400 text-xs sm:text-base">{t('tarot.subtitle')}</p>
       </motion.div>
 
-      <div className="flex-1 flex items-center justify-center py-4">
-        <div className="sm:hidden flex flex-col items-center gap-4">
-          <div className="flex justify-center gap-4">
-            {cards.slice(0, 2).map((card, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-purple-600 text-white text-[10px] px-2 py-0.5 rounded-full mb-2">
-                  {card.position}
-                </div>
-                <div
-                  onClick={() => flipCard(index)}
-                  className={`card-flip w-[75px] h-[120px] cursor-pointer ${!card.isFlipped ? 'animate-pulse-glow' : ''}`}
-                >
-                  <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
-                    <div className="card-face card-back rounded-lg overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-2xl">✦</span>
-                      </div>
-                    </div>
-                    <div 
-                      className="card-face card-front rounded-lg overflow-hidden border-2 border-amber-500/50 bg-white"
-                      style={{ transform: card.isReversed ? 'rotateY(180deg) rotate(180deg)' : 'rotateY(180deg)' }}
-                    >
-                      <img src={CARD_IMAGES[card.name_short] || ''} alt={card.name} className="w-full h-full object-cover" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-2 text-center w-[80px]">
-                  <p className="text-amber-400 text-[10px] font-medium leading-tight">{card.name}</p>
-                  {card.isReversed && <p className="text-purple-400 text-[8px]">({t('tarot.reversed')})</p>}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <div className="flex justify-center gap-3">
-            {cards.slice(2, 5).map((card, index) => (
-              <motion.div
-                key={index + 2}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: (index + 2) * 0.15 }}
-                className="flex flex-col items-center"
-              >
-                <div className="bg-purple-600 text-white text-[10px] px-2 py-0.5 rounded-full mb-2">
-                  {card.position}
-                </div>
-                <div
-                  onClick={() => flipCard(index + 2)}
-                  className={`card-flip w-[75px] h-[120px] cursor-pointer ${!card.isFlipped ? 'animate-pulse-glow' : ''}`}
-                >
-                  <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
-                    <div className="card-face card-back rounded-lg overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-2xl">✦</span>
-                      </div>
-                    </div>
-                    <div 
-                      className="card-face card-front rounded-lg overflow-hidden border-2 border-amber-500/50 bg-white"
-                      style={{ transform: card.isReversed ? 'rotateY(180deg) rotate(180deg)' : 'rotateY(180deg)' }}
-                    >
-                      <img src={CARD_IMAGES[card.name_short] || ''} alt={card.name} className="w-full h-full object-cover" />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-2 text-center w-[80px]">
-                  <p className="text-amber-400 text-[10px] font-medium leading-tight">{card.name}</p>
-                  {card.isReversed && <p className="text-purple-400 text-[8px]">({t('tarot.reversed')})</p>}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      <div className="sm:hidden flex-1 flex flex-col justify-center px-2 min-h-0">
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1 mb-2 px-6">
+          {cards.slice(0, 2).map((card, index) => renderMobileCard(card, index, true))}
         </div>
+        <div className="grid grid-cols-3 gap-x-2 gap-y-1 px-2">
+          {cards.slice(2, 5).map((card, index) => renderMobileCard(card, index + 2, false))}
+        </div>
+      </div>
 
-        <div className="hidden sm:flex flex-wrap justify-center items-end gap-x-5 md:gap-x-8 lg:gap-x-10 max-w-5xl">
+      <div className="hidden sm:flex flex-1 items-center justify-center py-4">
+        <div className="flex flex-wrap justify-center items-end gap-x-5 md:gap-x-8 lg:gap-x-10 max-w-5xl">
           {cards.map((card, index) => (
             <motion.div
               key={index}
@@ -338,7 +310,7 @@ export default function TarotReading() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="text-center py-6 sm:py-8"
+            className="text-center py-3 sm:py-8 pb-4 sm:pb-8"
           >
             <button
               onClick={getInterpretation}
