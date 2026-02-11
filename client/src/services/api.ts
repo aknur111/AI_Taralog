@@ -105,7 +105,7 @@ export interface AdminUser {
   createdAt: string;
 }
 
-export interface AdminReading extends Reading {
+export interface AdminReading extends Omit<Reading, 'user'> {
   user: {
     _id: string;
     username: string;
