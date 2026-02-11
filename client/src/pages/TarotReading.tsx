@@ -190,66 +190,69 @@ export default function TarotReading() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 overflow-x-hidden">
+    <div className="min-h-[calc(100vh-5rem)] flex flex-col px-3 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-12"
+        className="text-center mb-6 sm:mb-8"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-amber-400 mb-3">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-amber-400 mb-2">
           {t('tarot.title')}
         </h1>
-        <p className="text-gray-400">{t('tarot.subtitle')}</p>
+        <p className="text-gray-400 text-sm sm:text-base">{t('tarot.subtitle')}</p>
       </motion.div>
 
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-6 mb-12 px-2">
-        {cards.map((card, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15 }}
-            className="relative"
-          >
-            <div className="absolute -top-5 sm:-top-8 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[8px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full whitespace-nowrap">
-              {card.position}
-            </div>
-            
-            <div
-              onClick={() => flipCard(index)}
-              className={`card-flip w-[60px] h-[100px] xs:w-[80px] xs:h-[130px] sm:w-[120px] sm:h-[200px] md:w-[150px] md:h-[250px] cursor-pointer ${
-                !card.isFlipped ? 'animate-pulse-glow' : ''
-              }`}
+      <div className="flex-1 flex items-center justify-center py-4">
+        <div className="flex flex-wrap justify-center items-end gap-x-3 sm:gap-x-5 md:gap-x-8 lg:gap-x-10 max-w-5xl">
+          {cards.map((card, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.15 }}
+              className={`relative flex flex-col items-center ${index % 2 === 0 ? 'mb-10 sm:mb-14 md:mb-20 lg:mb-24' : 'mt-10 sm:mt-14 md:mt-20 lg:mt-24'}`}
             >
-              <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
-                <div className="card-face card-back rounded-xl overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
-                  <div className="w-full h-full flex items-center justify-center bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10%200L20%2010L10%2020L0%2010z%22%20fill%3D%22%239333ea%22%20fill-opacity%3D%220.1%22%2F%3E%3C%2Fsvg%3E')]">
-                    <span className="text-xl sm:text-4xl md:text-5xl">✦</span>
+              <div className="bg-purple-600 text-white text-[10px] sm:text-xs md:text-sm px-2 sm:px-3 py-0.5 sm:py-1 rounded-full mb-2 sm:mb-3">
+                {card.position}
+              </div>
+              
+              <div
+                onClick={() => flipCard(index)}
+                className={`card-flip w-[60px] h-[95px] sm:w-[100px] sm:h-[160px] md:w-[140px] md:h-[220px] lg:w-[160px] lg:h-[250px] cursor-pointer ${
+                  !card.isFlipped ? 'animate-pulse-glow' : ''
+                }`}
+              >
+                <div className={`card-flip-inner w-full h-full ${card.isFlipped ? 'flipped' : ''}`}>
+                  <div className="card-face card-back rounded-lg sm:rounded-xl overflow-hidden border-2 border-amber-500/50 bg-gradient-to-br from-purple-900 to-violet-950">
+                    <div className="w-full h-full flex items-center justify-center bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M10%200L20%2010L10%2020L0%2010z%22%20fill%3D%22%239333ea%22%20fill-opacity%3D%220.1%22%2F%3E%3C%2Fsvg%3E')]">
+                      <span className="text-xl sm:text-3xl md:text-5xl lg:text-6xl">✦</span>
+                    </div>
+                  </div>
+                  
+                  <div 
+                    className="card-face card-front rounded-lg sm:rounded-xl overflow-hidden border-2 border-amber-500/50 bg-white"
+                    style={{ transform: card.isReversed ? 'rotateY(180deg) rotate(180deg)' : 'rotateY(180deg)' }}
+                  >
+                    <img
+                      src={CARD_IMAGES[card.name_short] || ''}
+                      alt={card.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
-                
-                <div 
-                  className="card-face card-front rounded-xl overflow-hidden border-2 border-amber-500/50 bg-white"
-                  style={{ transform: card.isReversed ? 'rotateY(180deg) rotate(180deg)' : 'rotateY(180deg)' }}
-                >
-                  <img
-                    src={CARD_IMAGES[card.name_short] || ''}
-                    alt={card.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
               </div>
-            </div>
-            <div className="mt-1 sm:mt-2 text-center max-w-[60px] xs:max-w-[80px] sm:max-w-[120px] md:max-w-[150px]">
-              <p className="text-amber-400 text-[8px] sm:text-xs font-medium leading-tight truncate">
-                {card.name}
-              </p>
-              {card.isReversed && (
-                <p className="text-purple-400 text-[6px] sm:text-[10px]">({t('tarot.reversed')})</p>
-              )}
-            </div>
-          </motion.div>
-        ))}
+              
+              <div className="mt-2 sm:mt-3 text-center w-[70px] sm:w-[110px] md:w-[150px] lg:w-[170px]">
+                <p className="text-amber-400 text-[9px] sm:text-xs md:text-sm font-medium leading-tight">
+                  {card.name}
+                </p>
+                {card.isReversed && (
+                  <p className="text-purple-400 text-[8px] sm:text-[10px] md:text-xs">({t('tarot.reversed')})</p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <AnimatePresence>
@@ -258,12 +261,12 @@ export default function TarotReading() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="text-center mb-12"
+            className="text-center py-6 sm:py-8"
           >
             <button
               onClick={getInterpretation}
               disabled={isSubmitting}
-              className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold px-8 rounded-xl text-lg transition-all hover:scale-105 glow-gold disabled:opacity-50 min-w-[320px] overflow-hidden relative h-14"
+              className="w-full max-w-sm mx-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-semibold px-6 rounded-xl text-base sm:text-lg transition-all hover:scale-105 glow-gold disabled:opacity-50 overflow-hidden relative h-12 sm:h-14"
             >
               <AnimatePresence mode="popLayout">
                 {isSubmitting ? (
@@ -299,16 +302,16 @@ export default function TarotReading() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass rounded-2xl p-6 md:p-8"
+            className="glass rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10 mt-6 max-w-4xl mx-auto"
           >
-            <h2 className="text-2xl font-bold text-amber-400 mb-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-amber-400 mb-4 sm:mb-6 text-center">
               {t('tarot.interpretation')}
             </h2>
-            <div className="prose prose-invert prose-purple max-w-none prose-headings:text-amber-400 prose-strong:text-purple-300 prose-p:text-gray-300 prose-li:text-gray-300">
+            <div className="prose prose-invert prose-purple max-w-none prose-headings:text-amber-400 prose-strong:text-purple-300 prose-p:text-gray-300 prose-li:text-gray-300 prose-sm sm:prose-base md:px-4 lg:px-8">
               <ReactMarkdown>{interpretation}</ReactMarkdown>
             </div>
             
-            <div className="mt-8 text-center">
+            <div className="mt-6 sm:mt-8 text-center">
               <button
                 onClick={() => navigate('/history')}
                 className="text-purple-400 hover:text-purple-300 transition-colors"

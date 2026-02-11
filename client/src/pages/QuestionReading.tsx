@@ -84,17 +84,17 @@ export default function QuestionReading() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 overflow-x-hidden">
+    <div className="max-w-2xl mx-auto px-3 sm:px-4 overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass rounded-2xl p-6 md:p-8"
+        className="glass rounded-2xl p-4 sm:p-6 md:p-8"
       >
-        <div className="text-center mb-8">
-          <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${config.color} flex items-center justify-center mx-auto mb-4`}>
-            <Icon className="w-10 h-10 text-white" />
+        <div className="text-center mb-6 sm:mb-8">
+          <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br ${config.color} flex items-center justify-center mx-auto mb-4`}>
+            <Icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-amber-400">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">
             {t(`question.${type}`)}
           </h1>
         </div>
@@ -148,7 +148,7 @@ export default function QuestionReading() {
                         exit={{ height: 0, opacity: 0 }}
                         className="overflow-hidden"
                       >
-                        <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-purple-500/20">
+                        <div className="space-y-3 mt-4 pt-4 border-t border-purple-500/20">
                           <div>
                             <label className="block text-xs text-gray-400 mb-1">
                               {t('question.partner.firstName')}
@@ -193,7 +193,7 @@ export default function QuestionReading() {
                               className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-purple-400"
                             />
                           </div>
-                          <div className="col-span-2">
+                          <div>
                             <label className="block text-xs text-gray-400 mb-1">
                               {t('question.partner.birthPlace')}
                             </label>

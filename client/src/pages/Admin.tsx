@@ -209,12 +209,6 @@ export default function Admin() {
 
       {activeTab === 'prompts' && (
         <div className="flex-1 flex overflow-hidden">
-          <button
-            onClick={() => setShowSidebar(true)}
-            className="md:hidden fixed top-36 left-4 z-30 p-2 bg-purple-600 rounded-lg text-white"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
 
           <AnimatePresence>
             {showSidebar && (
@@ -306,10 +300,18 @@ export default function Admin() {
           <main className="flex-1 flex flex-col min-w-0 bg-[#0f0a1a]">
             {selectedPrompt ? (
               <>
-                <div className="flex items-center justify-between p-4 border-b border-purple-500/20 bg-[#1a0f2e]/50">
-                  <div className="ml-10 md:ml-0">
-                    <h1 className="text-xl font-bold text-amber-400">{selectedPrompt.name}</h1>
-                    <p className="text-gray-500 text-sm">{t('admin.content')}</p>
+                <div className="flex items-center justify-between p-3 sm:p-4 border-b border-purple-500/20 bg-[#1a0f2e]/50">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setShowSidebar(true)}
+                      className="md:hidden p-2 bg-purple-600 rounded-lg text-white"
+                    >
+                      <Menu className="w-5 h-5" />
+                    </button>
+                    <div>
+                      <h1 className="text-lg sm:text-xl font-bold text-amber-400">{selectedPrompt.name}</h1>
+                      <p className="text-gray-500 text-xs sm:text-sm">{t('admin.content')}</p>
+                    </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -339,10 +341,20 @@ export default function Admin() {
                 </div>
               </>
             ) : (
-              <div className="flex-1 flex items-center justify-center text-gray-500">
-                <div className="text-center">
-                  <FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                  <p>{t('admin.emptySub')}</p>
+              <div className="flex-1 flex flex-col">
+                <div className="p-3 sm:p-4 border-b border-purple-500/20 bg-[#1a0f2e]/50 md:hidden">
+                  <button
+                    onClick={() => setShowSidebar(true)}
+                    className="p-2 bg-purple-600 rounded-lg text-white"
+                  >
+                    <Menu className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="flex-1 flex items-center justify-center text-gray-500">
+                  <div className="text-center">
+                    <FileText className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                    <p>{t('admin.emptySub')}</p>
+                  </div>
                 </div>
               </div>
             )}
