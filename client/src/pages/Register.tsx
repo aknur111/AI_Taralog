@@ -1,6 +1,7 @@
 import { useState } from 'react';
-const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,64}$/;
 import { Link, useNavigate } from 'react-router-dom';
+
+const passwordRule = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,64}$/;
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -19,7 +20,8 @@ export default function Register() {
     lastName: '',
     birthDate: '',
     birthPlace: '',
-    birthTime: ''
+    birthTime: '',
+    gender: ''
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ export default function Register() {
     e.preventDefault();
     setError('');
     if (!passwordRule.test(formData.password)) {
-      setError("Password must be 8+ chars and include: uppercase, lowercase, number, special symbol.");
+      setError(t('auth.passwordWeak'));
       return;
     }
     setIsLoading(true);
@@ -47,7 +49,8 @@ export default function Register() {
           lastName: formData.lastName,
           birthDate: formData.birthDate,
           birthPlace: formData.birthPlace,
-          birthTime: formData.birthTime || undefined
+          birthTime: formData.birthTime || undefined,
+          gender: formData.gender
         }
       );
       navigate('/');
@@ -132,6 +135,7 @@ export default function Register() {
                   required
                 />
               </div>
+              <p className="text-gray-500 text-xs mt-1">{t('auth.passwordHint')}</p>
             </div>
 
             <div className="pt-4 border-t border-purple-500/20">
@@ -195,18 +199,43 @@ export default function Register() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
-                    <Clock className="w-4 h-4 inline mr-1" />
-                    {t('profile.birthTime')}
-                    <span className="text-gray-500 text-xs ml-2">({t('auth.optional')})</span>
-                  </label>
-                  <input
-                    type="time"
-                    value={formData.birthTime}
-                    onChange={(e) => handleChange('birthTime', e.target.value)}
-                    className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <Clock className="w-4 h-4 inline mr-1" />
+                      {t('profile.birthTime')}
+                      <span className="text-gray-500 text-xs ml-1">({t('auth.optional')})</span>
+                    </label>
+                    <input
+                      type="time"
+                      value={formData.birthTime}
+                      onChange={(e) => handleChange('birthTime', e.target.value)}
+                      className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      {t('profile.gender')} *
+                    </label>
+                    <div className="relative">
+                      <select
+                        value={formData.gender}
+                        onChange={(e) => handleChange('gender', e.target.value)}
+                        className="w-full bg-white/5 border border-purple-500/30 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-purple-400 appearance-none cursor-pointer"
+                        required
+                      >
+                        <option value="" className="bg-[#1a0f2e]">{t('profile.selectGender')}</option>
+                        <option value="female" className="bg-[#1a0f2e]">{t('profile.female')}</option>
+                        <option value="male" className="bg-[#1a0f2e]">{t('profile.male')}</option>
+                        <option value="other" className="bg-[#1a0f2e]">{t('profile.other')}</option>
+                      </select>
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

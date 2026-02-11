@@ -91,6 +91,44 @@ export interface Prompt {
   createdAt: string;
 }
 
+export interface AdminUser {
+  _id: string;
+  username: string;
+  email: string;
+  role: string;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  birthPlace: string;
+  birthTime?: string;
+  gender: string;
+  createdAt: string;
+}
+
+export interface AdminReading extends Reading {
+  user: {
+    _id: string;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    gender: string;
+    birthDate: string;
+  };
+}
+
+export interface AdminStats {
+  totalUsers: number;
+  totalReadings: number;
+  genderStats: { male: number; female: number; other: number };
+  ageGroups: Record<string, number>;
+  readingTypes: Record<string, number>;
+  uniqueUsersByType: Record<string, number>;
+  readingsByGender: { male: number; female: number; other: number };
+  readingsByAge: Record<string, number>;
+  dailyReadings: Record<string, number>;
+}
+
 export const tarotApi = {
   async getRandomCards(count: number = 5): Promise<TarotCard[]> {
     const response = await fetch(`https://tarotapi.dev/api/v1/cards/random?n=${count}`);
@@ -127,4 +165,11 @@ export const userApi = {
   getProfile: () => api.get<Record<string, unknown>>('/api/users/me'),
   updateProfile: (data: Record<string, unknown>) => 
     api.put<Record<string, unknown>>('/api/users/me', data)
+};
+
+export const adminApi = {
+  getUsers: () => api.get<AdminUser[]>('/api/admin/users'),
+  getReadings: () => api.get<AdminReading[]>('/api/admin/readings'),
+  getStats: () => api.get<AdminStats>('/api/admin/stats'),
+  deleteReading: (id: string) => api.delete(`/api/admin/readings/${id}`)
 };

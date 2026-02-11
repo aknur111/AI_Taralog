@@ -25,6 +25,7 @@ const registerSchema = Joi.object({
     .pattern(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/)
     .allow("")
     .optional(),
+  gender: Joi.string().valid("male", "female", "other").required(),
 });
 
 const loginSchema = Joi.object({
