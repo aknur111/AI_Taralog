@@ -53,9 +53,9 @@ We use **[xAI Grok](https://x.ai/)** for generating personalized tarot interpret
 
 **Integration:** `@ai-sdk/xai` library (Vercel AI SDK)
 
-**Model:** `grok-3-mini-beta`
+**Model:** `grok-4.1-reasoning`
 
-**Environment variable:** `XAI_API_KEY` or `GROK_API_KEY`
+**Environment variable:** `XAI_API_KEY`
 
 **How it works:**
 
@@ -71,9 +71,9 @@ We use **[xAI Grok](https://x.ai/)** for generating personalized tarot interpret
 3. **Grok API Service** (`services/grokApi.service.js`) sends request:
 ```javascript
 const result = await generateText({
-  model: this.xai('grok-3-mini-beta'),
-  system: systemPrompt,    // From database
-  prompt: userMessage,     // Built context
+  model: this.xai('grok-4.1-reasoning'),
+  system: systemPrompt,   
+  prompt: userMessage,   
 });
 ```
 
@@ -168,7 +168,6 @@ const getAge = (birthDate) => {
 - xAI Grok API integration (@ai-sdk/xai — AI interpretations)
 - Context Builder service (user data, cards, partner info)
 - Prompt management system (MongoDB storage, admin CRUD)
-- Email service integration (Nodemailer — registration notifications)
 - Admin panel (users management, statistics, prompts editor)
 - React + TypeScript frontend (Vite, Tailwind CSS, Framer Motion)
 - Responsive UI with magical theme and animations
