@@ -12,7 +12,122 @@ The backend is built with Node.js, Express, and MongoDB Atlas. Readings are stor
 - JWT Authentication
 - bcrypt (password hashing)
 - Joi (validation)
-- Basic frontend: HTML in `views/`, static files in `public/`
+- React + TypeScript + Vite (frontend)
+- Tailwind CSS + Framer Motion (UI/animations)
+- xAI Grok API (AI interpretations)
+- Tarot API (card data)
+
+
+
+## External APIs & Integrations
+
+### Tarot Cards API
+
+We use the free **[Tarot API](https://tarotapi.dev/)** to fetch tarot card data.
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET https://tarotapi.dev/api/v1/cards` | Returns all 78 tarot cards with names, meanings (upright/reversed), and descriptions |
+| `GET https://tarotapi.dev/api/v1/cards/random?n=5` | Returns N random cards for a spread |
+
+**Card data structure:**
+```json
+{
+  "name": "The Magician",
+  "name_short": "ar01",
+  "type": "major",
+  "meaning_up": "Skill, diplomacy, address...",
+  "meaning_rev": "Physician, Magus, mental disease...",
+  "desc": "A youthful figure in the robe of a magician..."
+}
+```
+
+Card images are fetched from **Sacred Texts** archive:
+```
+https://sacred-texts.com/tarot/pkt/img/{name_short}.jpg
+```
+
+### xAI Grok API (AI Interpretation)
+
+We use **[xAI Grok](https://x.ai/)** for generating personalized tarot interpretations.
+
+**Integration:** `@ai-sdk/xai` library (Vercel AI SDK)
+
+**Model:** `grok-3-mini-beta`
+
+**Environment variable:** `XAI_API_KEY` or `GROK_API_KEY`
+
+**How it works:**
+
+1. **System prompts** are stored in MongoDB (`Prompt` collection) and loaded by reading type (taro, love, money, work, general)
+
+2. **Context Builder** (`services/contextBuilder.service.js`) constructs user message with:
+   - User data: name, gender, birth date/place/time
+   - Language preference (Russian/English)
+   - Question (if applicable)
+   - Cards with positions (for tarot spread)
+   - Partner data (for love readings)
+
+3. **Grok API Service** (`services/grokApi.service.js`) sends request:
+```javascript
+const result = await generateText({
+  model: this.xai('grok-3-mini-beta'),
+  system: systemPrompt,    // From database
+  prompt: userMessage,     // Built context
+});
+```
+
+**Tarot Spread Layout (Five Card Cross):**
+```
+        [Past]
+[You Now]  [Future]
+       [Present]
+        [Advice]
+```
+
+### Admin Statistics
+
+Statistics endpoint (`GET /api/admin/stats`) aggregates data from Users and Readings collections.
+
+**Metrics calculated:**
+
+| Metric | Description |
+|--------|-------------|
+| `totalUsers` | Total registered users |
+| `totalReadings` | Total readings created |
+| `genderStats` | Users distribution by gender (male/female/other) |
+| `ageGroups` | Users distribution by age (18-24, 25-34, 35-44, 45-54, 55+) |
+| `readingTypes` | Total requests per type (taro, love, money, work, general) |
+| `uniqueUsersByType` | Unique users count per reading type |
+| `readingsByGender` | Readings distribution by user gender |
+| `readingsByAge` | Readings distribution by user age group |
+| `dailyReadings` | Daily activity for last 30 days |
+
+**Age calculation:**
+```javascript
+const getAge = (birthDate) => {
+  const birth = new Date(birthDate);
+  let age = now.getFullYear() - birth.getFullYear();
+  const m = now.getMonth() - birth.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+  return age;
+};
+```
+
+**Response example:**
+```json
+{
+  "totalUsers": 150,
+  "totalReadings": 523,
+  "genderStats": { "male": 45, "female": 98, "other": 7 },
+  "ageGroups": { "18-24": 52, "25-34": 67, "35-44": 21, "45-54": 8, "55+": 2 },
+  "readingTypes": { "taro": 234, "love": 156, "money": 78, "work": 45, "general": 10 },
+  "uniqueUsersByType": { "taro": 89, "love": 72, "money": 45, "work": 30, "general": 8 },
+  "readingsByGender": { "male": 156, "female": 345, "other": 22 },
+  "readingsByAge": { "18-24": 198, "25-34": 234, "35-44": 67, "45-54": 20, "55+": 4 },
+  "dailyReadings": { "2026-02-10": 15, "2026-02-11": 23, "2026-02-12": 18 }
+}
+```
 
 
 
@@ -27,11 +142,11 @@ The backend is built with Node.js, Express, and MongoDB Atlas. Readings are stor
 - Global error handling middleware
 - Responsive pages served from `views/` with static assets in `public/`
 
-### Planned / In Progress
-- Tarot Cards API integration (fetch card data for spreads)
-- AI interpretation service (generate reading interpretation)
-- Optional: Role-Based Access Control (RBAC) and Email notifications
-- Deployment URL + final screenshots
+### Integrations (Implemented)
+- Tarot Cards API integration (tarotapi.dev) — fetch 78 cards data for spreads
+- xAI Grok API integration — AI-powered personalized interpretations
+- Email notifications (Nodemailer) — welcome email on registration
+- Role-Based Access Control (RBAC) — admin panel for prompts, users, statistics
 
 
 
@@ -48,13 +163,17 @@ The backend is built with Node.js, Express, and MongoDB Atlas. Readings are stor
 - Validation (Joi) + global error handler
 - README screenshots
 
-### Penlova Evelina (Integrations & Frontend Enhancements)
-- Tarot Cards external API integration (cards data)
-- AI interpretation integration (LLM/AI service)
-- Maps API integration (if used in UI)
-- Frontend UI improvements (views/public)
-- Optional: Email service integration
-- Delpoyment
+### Penkova Evelina (Integrations & Frontend)
+- Tarot Cards API integration (tarotapi.dev — 78 cards with images)
+- xAI Grok API integration (@ai-sdk/xai — AI interpretations)
+- Context Builder service (user data, cards, partner info)
+- Prompt management system (MongoDB storage, admin CRUD)
+- Email service integration (Nodemailer — registration notifications)
+- Admin panel (users management, statistics, prompts editor)
+- React + TypeScript frontend (Vite, Tailwind CSS, Framer Motion)
+- Responsive UI with magical theme and animations
+- Multi-language support (Russian/English)
+- Deployment (Docker, DigitalOcean)
 
 
 
@@ -76,7 +195,13 @@ Create a file src/.env and add (you can also see .env.example):
 PORT=3000
 MONGO_URI=mongodb+srv://<DB_USER>:<DB_PASSWORD>@<CLUSTER_URL>/ai_taralog?retryWrites=true&w=majority&appName=Cluster0
 JWT_SECRET=<YOUR_RANDOM_SECRET>
+XAI_API_KEY=<YOUR_XAI_API_KEY>
 
+# Optional: Email (Nodemailer)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=<YOUR_EMAIL>
+SMTP_PASS=<YOUR_APP_PASSWORD>
 ```
 
 **Notes:**
