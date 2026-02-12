@@ -246,6 +246,40 @@ Error responses include meaningful status codes:
 
 ## Screenshots
 
+### Web Application
+
+#### Main page
+![main](./screenshots/main.png)
+
+#### Tarot card spread
+![taro](./screenshots/taro.png)
+
+#### Waiting for AI response
+![response_waiting](./screenshots/response_waiting.png)
+
+#### AI interpretation
+![response](./screenshots/response.png)
+
+#### Question page
+![question](./screenshots/question.png)
+
+#### Reading history
+![history](./screenshots/history.png)
+
+#### History details
+![data_in_history](./screenshots/data_in_history.png)
+
+#### Admin: Users management
+![users](./screenshots/users.png)
+
+#### Admin: Statistics
+![statistics](./screenshots/statistics.png)
+
+#### Admin: Prompts management
+![prompts](./screenshots/prompts.png)
+
+---
+
 ### API tests (Postman)
 
 #### Health check
